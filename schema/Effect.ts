@@ -17,33 +17,7 @@ const Duration = z.enum([
   "leaveZone",
 ]);
 
-const EffectName = z.enum([
-  "Marked",
-  "Divine Challenge",
-  "Divine Sanction",
-  "Dazed",
-  "Dominated",
-  "Dying",
-  "Buff",
-  "Debuff",
-  "Grabbed",
-  "Hidden",
-  "Immobilized",
-  "Deafened",
-  "Helpless",
-  "Blinded",
-  "Petrified",
-  "Removed from play",
-  "Restrained",
-  "Unconscious",
-  "Weakened",
-  "Prone",
-  "Stunned",
-  "Surprised",
-  "Slowed",
-  "Combat Advantage",
-  "Ongoing Damage",
-]);
+const EffectName = z.enum([]);
 
 const EffectedAttribute = z.enum([
   "strength",
@@ -71,7 +45,8 @@ const EffectProperty = z.object({
   name: EffectName,
   effectedAttribute: EffectedAttribute.optional(),
   value: z.number().optional(),
-  damageType: z.string().optional(),
+  damageType: DamageType.optional(),
+  additionalHealing: z.string().optional(),
 });
 
 export const Effect = z.object({

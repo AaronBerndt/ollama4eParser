@@ -26,7 +26,6 @@ const keywords = z.enum([
   "Implement",
   "Invigorating",
   "Lightning",
-  "m",
   "Martial",
   "Necromancy",
   "Necrotic",
@@ -69,9 +68,9 @@ export const Power = z.object({
   ]),
   target: z.string(),
   keywords: z.array(keywords),
-
   attack: z.string().optional(),
   damage: z.string().optional(),
+  missDamage: z.string().optional(),
   onHitEffects: z.array(Effect).optional(),
   onMissEffects: z.array(Effect).optional(),
   onEffectEffects: z.array(Effect).optional(),

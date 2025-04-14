@@ -20,7 +20,9 @@ const server = Bun.serve({
             );
           }
 
-          let prompt = `Parse the following D&D 4e power \n\n${power} into JSON based on the schema`;
+          let prompt = `
+Please parse the following power string into a JSON object. The power string is: ${power}.
+`;
 
           const response = await ollama.generate({
             model: "4eParser",
