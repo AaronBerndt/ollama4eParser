@@ -1,25 +1,57 @@
 import { z } from "zod";
 import { DamageType } from "./DamageType";
 
-const Duration = z.enum([
+export const Duration = z.enum([
   "saveEnds",
   "endOfEncounter",
-  "trigger",
   "startOfEffectersTurn",
   "endOfEffectersTurn",
   "startOfEffectedTurn",
   "endOfEffectedTurn",
-  "permanent",
+  //"permanent",
   "nextAttackRoll",
   "nextDamageRoll",
   "oneTime",
-  "enterZone",
-  "leaveZone",
+  // "enterZone",
+  // "leaveZone",
 ]);
 
-const EffectName = z.enum([]);
+export const EffectName = z.enum([
+  "Dazed",
+  "Dominated",
+  "Dying",
+  "Grabbed",
+  "Hidden",
+  "Immobilized",
+  "Deafened",
+  "Helpless",
+  "Blinded",
+  "Petrified",
+  "Removed from play",
+  "Restrained",
+  "Unconscious",
+  "Weakened",
+  "Prone",
+  "Stunned",
+  "Surprised",
+  "Slowed",
+  "Combat Advantage",
+  "Marked",
+  "Divine Challenge",
+  "Divine Sanction",
+  "Hunter's Quarry",
+  "Warlock's Curse",
+  "Immune",
+  "Ongoing Damage",
+  "Vulnerable",
+  "Resist",
+  "Regeneration",
+  "Temporary Hit Points",
+  "Healing",
+  "Modify",
+]);
 
-const EffectedAttribute = z.enum([
+export const EffectedAttribute = z.enum([
   "strength",
   "dexterity",
   "constitution",
@@ -31,9 +63,6 @@ const EffectedAttribute = z.enum([
   "reflex",
   "attackRoll",
   "damage",
-  "vulnerable",
-  "resist",
-  "immune",
   "savingThrows",
   "deathSaves",
   "skillCheck",
@@ -49,8 +78,17 @@ const EffectProperty = z.object({
   additionalHealing: z.string().optional(),
 });
 
+const AfterEffectProperty = z.object({
+  name: EffectName,
+  effectedAttribute: EffectedAttribute.optional(),
+  value: z.number().optional(),
+  damageType: DamageType.optional(),
+  additionalHealing: z.string().optional(),
+  duration: Duration,
+});
+
 export const Effect = z.object({
   effectProperties: z.array(EffectProperty),
   duration: Duration,
-  afterEffectProperties: z.array(EffectProperty).optional(),
+  afterEffectProperties: z.array(AfterEffectProperty).optional(),
 });

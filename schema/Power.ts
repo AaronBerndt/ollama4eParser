@@ -1,7 +1,9 @@
 import { z } from "zod";
-import { Effect } from "./Effect";
+import { Effect, EffectName } from "./Effect";
 
 const keywords = z.enum([
+  "Range",
+  "Melee",
   "Acid",
   "Arcane",
   "Augmentable",
@@ -70,8 +72,9 @@ export const Power = z.object({
   keywords: z.array(keywords),
   attack: z.string().optional(),
   damage: z.string().optional(),
+  damageLevel21: z.string().optional(),
   missDamage: z.string().optional(),
-  onHitEffects: z.array(Effect).optional(),
-  onMissEffects: z.array(Effect).optional(),
-  onEffectEffects: z.array(Effect).optional(),
+  onHitEffects: z.array(Effect),
+  onMissEffects: z.array(Effect),
+  onEffects: z.array(Effect),
 });
